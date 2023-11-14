@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/Carrito.dart';
 import 'package:flutter_application_1/models/product.dart';
+import 'package:flutter_application_1/pages/datos_compra_page.dart'; // Importa la nueva página
 
 class CarritoPage extends StatefulWidget {
   final Carrito carrito;
@@ -21,11 +22,29 @@ class _CarritoPageState extends State<CarritoPage> {
     });
   }
 
+  void irADatosDeCompra(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DatosCompraPage(), // Página de datos de compra
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Carrito de Compras'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shop),
+            onPressed: () {
+              irADatosDeCompra(
+                  context); // Navegar a la página de datos de compra
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: widget.carrito.productos.length,
